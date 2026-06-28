@@ -202,11 +202,38 @@ After approval, run only commands relevant to the approved plan. Prefer targeted
 
 ## When to Ask Questions First
 
-If ambiguities do not block a safe minimal plan, include them as assumptions instead of asking first.
-Ask clarifying questions BEFORE producing the plan only when implementation would be unsafe,
-likely wrong, destructive, or materially scope-changing without the answer.
+If an ambiguity could reasonably lead to different code changes, behavior, files modified,
+business rules, UI behavior, data handling, permissions, API behavior, test expectations,
+or verification steps, ask one interactive clarification block BEFORE producing the implementation plan.
 
-Ask first if any of the following are blocking. If a question is useful but not blocking, place it under assumptions or risks instead of stopping.
+Do not convert implementation-changing ambiguities into assumptions unless the user explicitly asks for speed,
+or the safest default is obvious, reversible, and low-risk.
+
+Use this clarification format:
+
+```
+### Necesito aclarar algo antes del plan
+
+**Decisión:** [what decision must be made before planning]
+
+**Opciones:**
+1. [Option A — technical consequence]
+2. [Option B — technical consequence]
+3. [Option C — technical consequence]
+4. Otra — te explico exactamente lo que quiero
+
+**Recomendación:** [safest or most maintainable default, with reason]
+
+**Impacto:** [what files, behavior, risks, tests, or verification steps could change depending on the answer]
+
+Respóndeme con el número de opción o con tu propia instrucción.
+```
+
+Only skip this clarification block when the ambiguity is trivial, reversible, does not affect implementation,
+or can be safely resolved by inspecting the repository.
+
+Ask first if any of the following are blocking. If a question is useful but not implementation-changing,
+place it under assumptions or risks instead of stopping.
 
 **Repository Evidence**
 - Can the answer be found by inspecting files, tests, schemas, or docs? If yes, inspect first instead of asking.
